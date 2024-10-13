@@ -1,0 +1,20 @@
+.App {
+  text-align: center;
+  margin-top: 50px;
+}
+
+.movie-card {
+  display: inline-block;
+  margin: 20px;
+  width: 200px;
+}
+
+.movie-card img {
+  width: 100%;
+}
+
+.movies-list {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
