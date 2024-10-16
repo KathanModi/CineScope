@@ -1,3 +1,31 @@
+.movie-item {
+  border: 1px solid #333;
+  margin: 20px;
+  padding: 10px;
+  background-color: #222;
+  color: white;
+  text-align: center;
+}
+
+.movie-item img {
+  width: 100px;
+  height: auto;
+  margin-bottom: 10px;
+}
+
+button {
+  background-color: #e50914;
+  color: white;
+  border: none;
+  padding: 10px 15px;
+  cursor: pointer;
+  margin-top: 10px;
+}
+
+button:hover {
+  background-color: #b81d24;
+}
+
 .app-container {
   text-align: center;
   background-color: #1a1a1d;

@@ -1,6 +1,7 @@
 import React from 'react';
 import MoviesList from './pages/MoviesList';
 import SearchMovies from './components/SearchMovies';
+import Watchlist from './components/WatchList';
 import './App.css';
 
 function App() {
@@ -16,6 +17,9 @@ function App() {
 
       <div className="movies-section">
         <MoviesList />
+      </div>
+      <div className="watchlist-section">
+        <Watchlist/>
       </div>
 
       <footer className="app-footer">

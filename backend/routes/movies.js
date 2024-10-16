@@ -47,3 +47,31 @@ router.get('/:id', async (req, res) => {
 });
 
 module.exports = router;
+// Add movie to watchlist
+router.post('/watchlist/add', async (req, res) => {
+  try {
+    const { movieId } = req.body; // Movie ID from request body
+    const movie = await Movie.findById(movieId);
+    
+    if (!movie) {
+      return res.status(404).json({ message: 'Movie not found' });
+    }
+    
+    movie.watchlist.push(movieId); // Add to watchlist array
+    await movie.save();
+
+    res.json({ message: 'Movie added to watchlist', movie });
+  } catch (error) {
+    res.status(500).json({ error: 'Error adding movie to watchlist' });
+  }
+});
+
+// Get watchlist
+router.get('/watchlist', async (req, res) => {
+  try {
+    const movies = await Movie.find({ _id: { $in: req.body.watchlist } });
+    res.json(movies);
+  } catch (error) {
+    res.status(500).json({ error: 'Error fetching watchlist' });
+  }
+});
