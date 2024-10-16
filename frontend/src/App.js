@@ -1,12 +1,26 @@
 import React from 'react';
 import MoviesList from './pages/MoviesList';
+import SearchMovies from './components/SearchMovies';
 import './App.css';
 
 function App() {
   return (
-    <div className="App">
-      <h1>Movie Recommendation System</h1>
-      <MoviesList />
+    <div className="app-container">
+      <header className="app-header">
+        <h1>CineScope - Movie Recommendation System</h1>
+      </header>
+
+      <div className="search-section">
+        <SearchMovies />
+      </div>
+
+      <div className="movies-section">
+        <MoviesList />
+      </div>
+
+      <footer className="app-footer">
+        <p>&copy; 2024 CineScope. All rights reserved.</p>
+      </footer>
     </div>
   );
 }
