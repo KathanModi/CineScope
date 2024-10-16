@@ -1,7 +1,7 @@
 const express = require('express');
 const cors = require('cors');
 const mongoose = require('mongoose');
-require('dotenv').config();
+require('dotenv').config(); // Load environment variables from .env
 
 const app = express();
 app.use(cors());
@@ -12,14 +12,18 @@ const moviesRoute = require('./routes/movies');
 app.use('/api/movies', moviesRoute);
 
 // MongoDB connection
-mongoose.connect('mongodb://localhost:27017/movies', {
+const mongoURI = process.env.MONGO_URI; // Use Mongo URI from .env
+mongoose.connect(mongoURI, {
   useNewUrlParser: true,
   useUnifiedTopology: true,
-}).then(() => {
-  console.log("Connected to MongoDB");
-}).catch(err => console.log(err));
+})
+  .then(() => {
+    console.log("Connected to MongoDB");
+  })
+  .catch(err => console.log(err));
 
 // Start the server
-app.listen(5000, () => {
-  console.log('Server running on port 5000');
+const port = process.env.PORT || 5000; // Use port from .env or default to 5000
+app.listen(port, () => {
+  console.log(`Server running on port ${port}`);
 });
