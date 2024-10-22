@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 
 const Watchlist = () => {
@@ -13,20 +13,21 @@ const Watchlist = () => {
         console.error('Error fetching watchlist', error);
       }
     };
-
     fetchWatchlist();
   }, []);
 
   return (
-    <div className="watchlist">
+    <div>
       <h2>Your Watchlist</h2>
-      {watchlist.map(movie => (
-        <div key={movie._id} className="movie-item">
-          <h3>{movie.title}</h3>
-          <img src={movie.poster_path} alt={movie.title} />
-          <p>{movie.description}</p>
-        </div>
-      ))}
+      <div className="movies-list">
+        {watchlist.map(movie => (
+          <div key={movie._id} className="movie-item">
+            <h3>{movie.title}</h3>
+            <img src={movie.poster_path} alt={movie.title} />
+            <p>{movie.description}</p>
+          </div>
+        ))}
+      </div>
     </div>
   );
 };
