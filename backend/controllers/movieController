@@ -1,0 +1,20 @@
+const Movie = require('../models/Movie');
+
+exports.getPopularMovies = async (req, res) => {
+  try {
+    const movies = await Movie.find().limit(10);
+    res.json(movies);
+  } catch (err) {
+    res.status(500).json({ error: 'Failed to fetch popular movies' });
+  }
+};
+
+exports.searchMovies = async (req, res) => {
+  try {
+    const { query } = req.query;
+    const movies = await Movie.find({ title: new RegExp(query, 'i') });
+    res.json(movies);
+  } catch (err) {
+    res.status(500).json({ error: 'Failed to search movies' });
+  }
+};

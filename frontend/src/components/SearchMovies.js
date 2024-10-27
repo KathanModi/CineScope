@@ -2,54 +2,34 @@ import React, { useState } from 'react';
 import axios from 'axios';
 
 function SearchMovies() {
-  const [feel, setFeel] = useState('');
-  const [genre, setGenre] = useState('');
-  const [type, setType] = useState('');
+  const [query, setQuery] = useState('');
   const [movies, setMovies] = useState([]);
 
-  const handleSearch = async (e) => {
-    e.preventDefault();
+  const handleSearch = async () => {
     try {
-      const response = await axios.get('/api/movies/search', {
-        params: { feel, genre, type },
-      });
+      const response = await axios.get(`http://localhost:5000/api/movies/search?query=${query}`);
       setMovies(response.data);
-    } catch (err) {
-      console.error(err);
+    } catch (error) {
+      console.error('Error fetching search results', error);
     }
   };
 
   return (
-    <div>
-      <form onSubmit={handleSearch}>
-        <input
-          type="text"
-          placeholder="Feel"
-          value={feel}
-          onChange={(e) => setFeel(e.target.value)}
-        />
-        <input
-          type="text"
-          placeholder="Genre"
-          value={genre}
-          onChange={(e) => setGenre(e.target.value)}
-        />
-        <input
-          type="text"
-          placeholder="Type"
-          value={type}
-          onChange={(e) => setType(e.target.value)}
-        />
-        <button type="submit">Search</button>
-      </form>
-
-      <div>
-        <h2>Search Results</h2>
-        <ul>
-          {movies.map((movie) => (
-            <li key={movie._id}>{movie.title}</li>
-          ))}
-        </ul>
+    <div className="search-movies">
+      <input
+        type="text"
+        value={query}
+        onChange={(e) => setQuery(e.target.value)}
+        placeholder="Search for a movie..."
+      />
+      <button onClick={handleSearch}>Search</button>
+      <div className="search-results">
+        {movies.map((movie) => (
+          <div key={movie._id}>
+            <h3>{movie.title}</h3>
+            <p>{movie.description}</p>
+          </div>
+        ))}
       </div>
     </div>
   );

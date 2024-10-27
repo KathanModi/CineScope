@@ -1,9 +1,30 @@
-// User.js
 const mongoose = require('mongoose');
 
-const UserSchema = new mongoose.Schema({
-  username: String,
-  watchedMovies: [{ movieId: String, rating: Number }],
+const userSchema = new mongoose.Schema({
+  username: {
+    type: String,
+    required: true,
+    unique: true,
+  },
+  email: {
+    type: String,
+    required: true,
+    unique: true,
+  },
+  password: {
+    type: String,
+    required: true,
+  },
+  watchlist: [
+    {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: 'Movie', // Reference to Movie schema
+    },
+  ],
+  createdAt: {
+    type: Date,
+    default: Date.now,
+  },
 });
 
-module.exports = mongoose.model('User', UserSchema);
+module.exports = mongoose.model('User', userSchema);
